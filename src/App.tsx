@@ -70,7 +70,7 @@ function App() {
   return (
     <div className="w-screen h-screen relative bg-gradient-to-t from-custom-bg-gray-dark to-custom-bg-gray-light">
       <div className="w-[400px] h-max absolute inset-1/2 -translate-x-1/2 -translate-y-1/2">
-        <h1 className="mb-5 text-xl capitalize text-center text-custom-text-gray-dark font-bold">
+        <h1 className="select-none mb-5 text-xl capitalize text-center text-custom-text-gray-dark font-bold">
           password generator
         </h1>
         <div className="h-16 px-5 mb-5 flex justify-between items-center bg-custom-gray-light">
@@ -78,7 +78,7 @@ function App() {
             className={`text-xl ${
               password
                 ? "text-custom-text-gray-light-1"
-                : "text-custom-text-gray-dark"
+                : "select-none text-custom-text-gray-dark"
             }`}
           >
             {password || "P4$5W0rD!"}
@@ -143,7 +143,7 @@ function App() {
               />
             </div>
             <div className="h-14 flex justify-between items-center px-6 mb-5 bg-custom-gray-dark">
-              <p className="text-custom-text-gray-dark text-sm font-semibold uppercase">
+              <p className="select-none text-custom-text-gray-dark text-sm font-semibold uppercase">
                 strength
               </p>
               <div className="flex items-center gap-3">
@@ -242,7 +242,7 @@ function RangeElement({
     setPosition(Math.round(((value - 1) / (max - min)) * (width - 16) + 8));
   }, [value]);
 
-  function clickHandler(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+  function clickHandler(event: React.MouseEvent) {
     const container = document.getElementById("range-container");
     if (!container) return;
     const width = container.getBoundingClientRect().width || 0;
@@ -251,7 +251,7 @@ function RangeElement({
     onChange(update);
   }
 
-  function _mouseMoveHandler(event: MouseEvent) {
+  function _pointerMoveHandler(event: PointerEvent) {
     const container = document.getElementById("range-container");
     if (!container) return;
     const width = container.getBoundingClientRect().width || 0;
@@ -262,28 +262,28 @@ function RangeElement({
     onChange(update);
   }
 
-  function _mouseUpHandler() {
+  function _pointerUpHandler() {
     const container = document.getElementById("range-container");
     if (!container) return;
-    container.removeEventListener("mousemove", _mouseMoveHandler);
-    container.removeEventListener("mouseleave", _mouseLeaveHandler);
+    container.removeEventListener("pointermove", _pointerMoveHandler);
+    container.removeEventListener("pointerleave", _mouseLeaveHandler);
   }
 
   function _mouseLeaveHandler() {
     const container = document.getElementById("range-container");
     if (!container) return;
-    container.removeEventListener("mousemove", _mouseMoveHandler);
-    container.removeEventListener("mouseup", _mouseUpHandler);
+    container.removeEventListener("pointermove", _pointerMoveHandler);
+    container.removeEventListener("pointerup", _pointerUpHandler);
   }
 
   function dragHandler() {
     const container = document.getElementById("range-container");
     if (!container) return;
-    container.addEventListener("mousemove", _mouseMoveHandler);
+    container.addEventListener("pointermove", _pointerMoveHandler);
 
-    container.addEventListener("mouseup", _mouseUpHandler, { once: true });
+    container.addEventListener("pointerup", _pointerUpHandler, { once: true });
 
-    container.addEventListener("mouseleave", _mouseLeaveHandler, {
+    container.addEventListener("pointerleave", _mouseLeaveHandler, {
       once: true,
     });
   }
@@ -291,22 +291,27 @@ function RangeElement({
   return (
     <div>
       <div className="flex justify-between">
-        <p className="capitalize text-custom-text-gray-light-2">{title}</p>
-        <span className="block text-custom-green font-mono text-2xl">
+        <p className="select-none capitalize text-custom-text-gray-light-2">
+          {title}
+        </p>
+        <span className="select-none block text-custom-green font-mono text-2xl">
           {value}
         </span>
       </div>
       <div id="range-container" className="relative py-5 mb-2">
+        {/* range active section */}
         <div
           onClick={clickHandler}
           style={{ width: position + "px" }}
           className="absolute left-0 h-2 bg-custom-green rounded-sm transition"
         />
+        {/* range thumb */}
         <div
           style={{ left: position + "px" }}
-          onMouseDown={dragHandler}
-          className="absolute top-6 -translate-x-1/2 -translate-y-1/2 h-5 w-5 border-2 border-custom-text-gray-light-1 hover:border-custom-green bg-custom-text-gray-light-1 hover:bg-custom-gray-dark shadow hover:shadow-lg cursor-pointer rounded-full transition"
+          onPointerDown={dragHandler}
+          className="select-none absolute top-6 -translate-x-1/2 -translate-y-1/2 h-5 w-5 border-2 border-custom-text-gray-light-1 hover:border-custom-green bg-custom-text-gray-light-1 hover:bg-custom-gray-dark shadow hover:shadow-lg cursor-pointer rounded-full transition"
         />
+        {/* whole range */}
         <div
           onClick={clickHandler}
           className="w-full h-2 bg-custom-gray-dark rounded-sm"
