@@ -70,12 +70,12 @@ function App() {
   return (
     <div className="w-screen h-screen relative bg-gradient-to-t from-custom-bg-gray-dark to-custom-bg-gray-light">
       <div className="w-[400px] h-max absolute inset-1/2 -translate-x-1/2 -translate-y-1/2">
-        <h1 className="select-none mb-5 text-xl capitalize text-center text-custom-text-gray-dark font-bold">
+        <h1 className="select-none mb-5 text-xl capitalize text-center text-custom-text-gray-dark font-bold font-jetbrains-mono">
           password generator
         </h1>
         <div className="h-16 px-5 mb-5 flex justify-between items-center bg-custom-gray-light">
           <p
-            className={`text-xl ${
+            className={`text-2xl font-jetbrains-mono ${
               password
                 ? "text-custom-text-gray-light-1"
                 : "select-none text-custom-text-gray-dark"
@@ -143,11 +143,11 @@ function App() {
               />
             </div>
             <div className="h-14 flex justify-between items-center px-6 mb-5 bg-custom-gray-dark">
-              <p className="select-none text-custom-text-gray-dark text-sm font-semibold uppercase">
+              <p className="select-none text-custom-text-gray-dark text-sm font-semibold font-jetbrains-mono uppercase">
                 strength
               </p>
               <div className="flex items-center gap-3">
-                <p className="uppercase text-custom-text-gray-light-2">
+                <p className="uppercase text-custom-text-gray-light-2 font-jetbrains-mono">
                   {password && PASSWORD_STRENGTH[strength]}
                 </p>
                 <div className="flex gap-1.5">
@@ -167,7 +167,7 @@ function App() {
             <button
               type="submit"
               disabled={!(lowercase || uppercase || numbers || symbols)}
-              className="h-14 group w-full px-7 flex justify-center items-center gap-5 border-2 border-custom-green bg-custom-green hover:enabled:bg-custom-gray-light text-custom-gray-light hover:enabled:text-custom-green uppercase transition"
+              className="h-14 group w-full px-7 flex justify-center items-center gap-5 border-2 border-custom-green bg-custom-green hover:enabled:bg-custom-gray-light text-custom-gray-light hover:enabled:text-custom-green uppercase transition font-jetbrains-mono"
             >
               <span>generate</span>
               <svg
@@ -208,11 +208,11 @@ function CheckboxElement({
       <input
         type="checkbox"
         {...{ id, checked, onChange }}
-        className="mr-5 h-4 w-4 cursor-pointer border-2 border-custom-text-gray-light-2 hover:border-custom-green text-custom-green bg-transparent outline-none focus:ring-0 focus:ring-offset-white/50"
+        className="mr-5 h-4 w-4 cursor-pointer border-2 border-custom-text-gray-light-2 hover:border-custom-green text-custom-green bg-transparent outline-none focus:ring-0 focus:ring-offset-white/50 font-jetbrains-mono"
       />
       <label
         htmlFor={id}
-        className="select-none text-custom-text-gray-light-2 capitalize"
+        className="select-none text-custom-text-gray-light-2 capitalize font-jetbrains-mono"
       >
         {title}
       </label>
@@ -291,10 +291,10 @@ function RangeElement({
   return (
     <div>
       <div className="flex justify-between">
-        <p className="select-none capitalize text-custom-text-gray-light-2">
+        <p className="select-none capitalize text-custom-text-gray-light-2 font-jetbrains-mono">
           {title}
         </p>
-        <span className="select-none block text-custom-green font-mono text-2xl">
+        <span className="select-none block text-custom-green font-jetbrains-mono text-2xl">
           {value}
         </span>
       </div>

@@ -14,6 +14,9 @@ module.exports = {
         "custom-bg-gray-light": "#131219",
         "custom-bg-gray-dark": "#09080d",
       },
+      fontFamily: {
+        "jetbrains-mono": ["JetBrains Mono", "ui-monospace", "monospace"],
+      },
     },
   },
   plugins: [require("@tailwindcss/forms")],
