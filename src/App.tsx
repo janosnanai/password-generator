@@ -289,7 +289,7 @@ function RangeElement({
   }
 
   return (
-    <div>
+    <div id="range-container">
       <div className="flex justify-between">
         <p className="select-none capitalize text-custom-text-gray-light-2 font-jetbrains-mono">
           {title}
@@ -298,7 +298,7 @@ function RangeElement({
           {value}
         </span>
       </div>
-      <div id="range-container" className="relative py-5 mb-2">
+      <div className="relative py-5 mb-2">
         {/* range active section */}
         <div
           onClick={clickHandler}
