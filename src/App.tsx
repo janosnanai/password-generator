@@ -1,6 +1,6 @@
 import type { ChangeEvent, FormEvent } from "react";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { customAlphabet } from "nanoid";
 import zxcvbn from "zxcvbn";
 
@@ -251,7 +251,7 @@ function RangeElement({
     onChange(update);
   }
 
-  function _pointerMoveHandler(event: PointerEvent) {
+  function _slide(event: PointerEvent) {
     const container = document.getElementById("range-container");
     if (!container) return;
     const width = container.getBoundingClientRect().width || 0;
@@ -262,30 +262,18 @@ function RangeElement({
     onChange(update);
   }
 
-  function _pointerUpHandler() {
-    const container = document.getElementById("range-container");
-    if (!container) return;
-    container.removeEventListener("pointermove", _pointerMoveHandler);
-    container.removeEventListener("pointerleave", _mouseLeaveHandler);
+  function startSlidingHandler(event: React.PointerEvent) {
+    const thumb = document.getElementById("range-thumb");
+    if (!thumb) return;
+    thumb.onpointermove = _slide;
+    thumb.setPointerCapture(event.pointerId);
   }
 
-  function _mouseLeaveHandler() {
-    const container = document.getElementById("range-container");
-    if (!container) return;
-    container.removeEventListener("pointermove", _pointerMoveHandler);
-    container.removeEventListener("pointerup", _pointerUpHandler);
-  }
-
-  function dragHandler() {
-    const container = document.getElementById("range-container");
-    if (!container) return;
-    container.addEventListener("pointermove", _pointerMoveHandler);
-
-    container.addEventListener("pointerup", _pointerUpHandler, { once: true });
-
-    container.addEventListener("pointerleave", _mouseLeaveHandler, {
-      once: true,
-    });
+  function stopSlidingHandler(event: React.PointerEvent) {
+    const thumb = document.getElementById("range-thumb");
+    if (!thumb) return;
+    thumb.onpointermove = null;
+    thumb.releasePointerCapture(event.pointerId);
   }
 
   return (
@@ -307,8 +295,10 @@ function RangeElement({
         />
         {/* range thumb */}
         <div
+          id="range-thumb"
           style={{ left: position + "px" }}
-          onPointerDown={dragHandler}
+          onPointerDown={startSlidingHandler}
+          onPointerUp={stopSlidingHandler}
           className="select-none absolute top-6 -translate-x-1/2 -translate-y-1/2 h-5 w-5 border-2 border-custom-text-gray-light-1 hover:border-custom-green bg-custom-text-gray-light-1 hover:bg-custom-gray-dark shadow hover:shadow-lg cursor-pointer rounded-full transition"
         />
         {/* whole range */}
