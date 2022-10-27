@@ -69,13 +69,13 @@ function App() {
 
   return (
     <div className="w-screen h-screen relative bg-gradient-to-t from-custom-bg-gray-dark to-custom-bg-gray-light">
-      <div className="w-[400px] h-max absolute inset-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div className="w-[280px] mobile-md:w-[360px] mobile-lg:w-[400px] h-max absolute inset-1/2 -translate-x-1/2 -translate-y-1/2">
         <h1 className="select-none mb-5 text-xl capitalize text-center text-custom-text-gray-dark font-bold font-jetbrains-mono">
           password generator
         </h1>
         <div className="h-16 px-5 mb-5 flex justify-between items-center bg-custom-gray-light">
           <p
-            className={`text-2xl font-jetbrains-mono ${
+            className={`text-base mobile-md:text-xl mobile-lg:text-2xl font-jetbrains-mono ${
               password
                 ? "text-custom-text-gray-light-1"
                 : "select-none text-custom-text-gray-dark"
@@ -142,19 +142,20 @@ function App() {
                 onChange={symbolsChangeHandler}
               />
             </div>
-            <div className="h-14 flex justify-between items-center px-6 mb-5 bg-custom-gray-dark">
-              <p className="select-none text-custom-text-gray-dark text-sm font-semibold font-jetbrains-mono uppercase">
+            {/* strength element */}
+            <div className="h-14 flex justify-between items-center px-3 mobile-md:px-6 mb-5 bg-custom-gray-dark">
+              <p className="select-none text-custom-text-gray-dark text-xs mobile-md:text-sm font-semibold font-jetbrains-mono uppercase">
                 strength
               </p>
               <div className="flex items-center gap-3">
-                <p className="uppercase text-custom-text-gray-light-2 font-jetbrains-mono">
+                <p className="text-xs mobile-md:text-base uppercase text-custom-text-gray-light-2 font-jetbrains-mono">
                   {password && PASSWORD_STRENGTH[strength]}
                 </p>
                 <div className="flex gap-1.5">
                   {[1, 2, 3, 4].map((i) => (
                     <div
                       key={i}
-                      className={`h-6 w-2.5 border-2 ${
+                      className={`h-6 w-1.5 mobile-md:w-2.5 border mobile-md:border-2 ${
                         strength < i
                           ? "border-custom-text-gray-light-2"
                           : "border-custom-yellow bg-custom-yellow"
@@ -212,7 +213,7 @@ function CheckboxElement({
       />
       <label
         htmlFor={id}
-        className="select-none text-custom-text-gray-light-2 capitalize font-jetbrains-mono"
+        className="text-xs mobile-md:text-sm mobile-lg:text-base select-none text-custom-text-gray-light-2 capitalize font-jetbrains-mono"
       >
         {title}
       </label>

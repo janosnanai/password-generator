@@ -14,6 +14,11 @@ module.exports = {
         "custom-bg-gray-light": "#131219",
         "custom-bg-gray-dark": "#09080d",
       },
+      screens: {
+        "mobile-lg": "400px",
+        "mobile-md": "360px",
+        "mobile-sm": "280px",
+      },
       fontFamily: {
         "jetbrains-mono": ["JetBrains Mono", "ui-monospace", "monospace"],
       },
